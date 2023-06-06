@@ -1,16 +1,17 @@
 import NavBar from "../components/NavBar";
 import Home from "./Home";
 import Tickets from "./Tickets";
+import Authentication from "./Authentication";
+import CreateTicket from "./CreateTicket";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 const RouteLayout = () => {
     return (
         <>
             <NavBar />
-            <div>
-                <Outlet />
-            </div>
+            <Outlet />
         </>
     );
 };
@@ -22,6 +23,8 @@ const router = createBrowserRouter([
         children: [
             { path: "", element: <Home /> },
             { path: "tickets", element: <Tickets /> },
+            { path: "auth", element: <Authentication /> },
+            { path: "create-ticket", element: <CreateTicket /> },
         ],
     },
 ]);
@@ -32,6 +35,7 @@ const Layout = () => {
     return (
         <QueryClientProvider client={queryClient}>
             <RouterProvider router={router} />
+            <ReactQueryDevtools initialIsOpen />
         </QueryClientProvider>
     );
 };

@@ -1,11 +1,10 @@
-import { Button } from 'react-daisyui';
+import Container from "../UI/Container";
 
 const Home = () => {
     return (
-        <div >
-            Home
-            <Button color="primary">Click me!</Button>
-        </div>
+        <Container>
+            <h1 className="mb-4 text-2xl normal-case" color="ghost">Home</h1>
+        </Container>
     );
 };
 
