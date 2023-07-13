@@ -1,6 +1,7 @@
 import NavBar from "../components/NavBar";
 import Home from "./Home";
 import Tickets from "./Tickets";
+import Ticket from "./Ticket";
 import Authentication from "./Authentication";
 import CreateTicket from "./CreateTicket";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
         children: [
             { path: "", element: <Home /> },
             { path: "tickets", element: <Tickets /> },
+            { path: "ticket/:id", element: <Ticket /> },
             { path: "auth", element: <Authentication /> },
             { path: "create-ticket", element: <CreateTicket /> },
         ],

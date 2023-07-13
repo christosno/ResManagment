@@ -1,19 +1,31 @@
-import { useQuery } from "react-query";
-import axios from "axios";
-import { Card, Button } from "react-daisyui";
+
+import { Card } from "react-daisyui";
+import { Link } from "react-router-dom";
 import ErrorPage from "./ErrorPage";
 import LoadingSpinner from "../components/LoadingSpinner";
+import useTicketsData from "../hooks/useTicketsData";
 
-const fetchTickets = () => {
-    return axios.get("http://localhost:5000/api/tickets/get");
-};
+
+// const deleteTicket = (id) => {
+//     return axios.delete(`http://localhost:5000/api/tickets/get/delete/${id}`);
+// };
 
 const Tickets = () => {
 
-    const { isLoading, data, isError, error } = useQuery("tickets", fetchTickets);
+    const onSuccess = (data) => {
+        console.log("perform side effect after data fetching", data);
+    };
+    const onError = (err) => {
+        console.log("perform side effect after encountering error", err);
+    };
 
-    const editTicketHandler = (ticketId) => { console.log(`edit ticket ${ticketId}`); };
-    const deleteTicketHandler = (ticketId) => { console.log(`delete ticket ${ticketId}`); };
+    const {
+        isLoading,
+        data,
+        isError,
+        error,
+        // refetch // manualy trigger the query, we just need to put it in onClick event
+    } = useTicketsData(onSuccess, onError);
 
     if (isLoading) {
         return (<LoadingSpinner />);
@@ -30,18 +42,16 @@ const Tickets = () => {
                 return (
                     <li key={ticket.ticketId}>
                         <div className="p-2">
-                            <Card bordered="true">
-                                <Card.Body className="items-center text-center">
-                                    <Card.Title tag="h2">{`Ticket ${ticket.ticketId}`}</Card.Title>
-                                    <h2>Product: {ticket.product}</h2>
-                                    <h3>Status: {ticket.status}</h3>
-                                    <p>Description: {ticket.description}</p>
-                                    <Card.Actions className="justify-end">
-                                        <Button onClick={() => editTicketHandler(ticket.ticketId)}>Edit</Button>
-                                        <Button onClick={() => deleteTicketHandler(ticket.ticketId)}>Delete</Button>
-                                    </Card.Actions>
-                                </Card.Body>
-                            </Card>
+                            <Link to={`/ticket/${ticket.ticketId}`}>
+                                <Card bordered="true">
+                                    <Card.Body className="items-center text-center">
+                                        <Card.Title tag="h2">{`Ticket ${ticket.ticketId}`}</Card.Title>
+                                        <h2>Product: {ticket.product}</h2>
+                                        <h3>Status: {ticket.status}</h3>
+                                        <p>Description: {ticket.description}</p>
+                                    </Card.Body>
+                                </Card>
+                            </Link>
                         </div>
                     </li>
                 );
