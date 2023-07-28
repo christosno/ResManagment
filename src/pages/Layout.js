@@ -1,9 +1,7 @@
-import NavBar from "../components/NavBar";
+import NavBar from "../components/navBar/NavBar";
 import Home from "./Home";
-import Tickets from "./Tickets";
-import Ticket from "./Ticket";
+import PageFooter from "../components/footer/PageFooter";
 import Authentication from "./Authentication";
-import CreateTicket from "./CreateTicket";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
@@ -11,8 +9,10 @@ import { ReactQueryDevtools } from "react-query/devtools";
 const RouteLayout = () => {
     return (
         <>
-            <NavBar />
-            <Outlet />
+            <NavBar>
+                <Outlet />
+            </NavBar>
+            <PageFooter />
         </>
     );
 };
@@ -23,10 +23,7 @@ const router = createBrowserRouter([
         element: <RouteLayout />,
         children: [
             { path: "", element: <Home /> },
-            { path: "tickets", element: <Tickets /> },
-            { path: "ticket/:id", element: <Ticket /> },
             { path: "auth", element: <Authentication /> },
-            { path: "create-ticket", element: <CreateTicket /> },
         ],
     },
 ]);

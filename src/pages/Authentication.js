@@ -1,7 +1,7 @@
-import Container from "../UI/Container";
-import { Input, Link as DaisyuiLink } from "react-daisyui";
 
+import { Input, Link as DaisyuiLink } from "react-daisyui";
 import { useSearchParams, Link } from "react-router-dom";
+import Container from "../UI/Container";
 
 const Authentication = () => {
     const [searchParams] = useSearchParams();
