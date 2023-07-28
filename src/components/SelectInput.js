@@ -1,5 +1,3 @@
-
-
 const SelectInput = ({ setValue, value }) => {
 
     return (
