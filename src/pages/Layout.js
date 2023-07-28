@@ -23,10 +23,7 @@ const router = createBrowserRouter([
         element: <RouteLayout />,
         children: [
             { path: "", element: <Home /> },
-            { path: "tickets", element: <Tickets /> },
-            { path: "ticket/:id", element: <Ticket /> },
             { path: "auth", element: <Authentication /> },
-            { path: "create-ticket", element: <CreateTicket /> },
         ],
     },
 ]);
